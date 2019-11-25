@@ -25,8 +25,11 @@ public class DisplayBookStats {
     }
 
     public void printAuthorWithMostEnglishBooks() {
+        // get a list of just the english books
         List<Book> englishBooks = stats.filterToEnglishBooks();
+        // index those english books by author name
         Map<String, List<Book>> indexed = stats.indexByAuthor(englishBooks);
+        // from that index, find the author who wrote the most books
         Map.Entry<String, Integer> mostEnglish = stats.findMostBooksByAuthor(indexed);
 
         if (mostEnglish != null) {
@@ -69,14 +72,19 @@ public class DisplayBookStats {
     }
 
     public void printAuthorWithHighestAverageRating() {
-      Map<String, List<Book>> indexed = stats.indexByAuthor();
-      Map.Entry<String, Double> highestAverageRating = stats.findAuthorWithHighestAverageRating(indexed);
-        System.out.println(
-            String.format(
-                "Author with the highest average rating: %s. %.2f",
-                highestAverageRating.getKey(),
-                highestAverageRating.getValue()
-            )
-        );
+        // index all the books by author
+        Map<String, List<Book>> indexed = stats.indexByAuthor();
+        // from that index find the author with the highest average rating
+        Map.Entry<String, Double> highestAverageRating = stats.findAuthorWithHighestAverageRating(indexed);
+
+        if (highestAverageRating != null) {
+            System.out.println(
+                String.format(
+                    "Author with the highest average rating of all their books: %s. %.2f",
+                    highestAverageRating.getKey(),
+                    highestAverageRating.getValue()
+                )
+            );
+        }
     }
 }

@@ -93,9 +93,10 @@ public class TestDisplayBookStats {
     @Test
     public void testPrintAuthorWithMostEnglishBooksNotFound() {
         Map<String, List<Book>> indexed = new HashMap<String, List<Book>>();
+
         BookStats stats = Mockito.mock(BookStats.class);
 
-        Mockito.when(stats.findMostBooksByAuthor(indexed)).thenReturn(null);
+        Mockito.when(stats.findMostBooksByAuthor(indexed)).thenCallRealMethod();
 
         DisplayBookStats printer = new DisplayBookStats(stats);
 
@@ -201,6 +202,24 @@ public class TestDisplayBookStats {
         printer.printAuthorWithHighestAverageRating();
         resetStdOut();
 
-        assertEquals("Author with the highest average rating: Highest Rated Author. 5.00\n", stdOut.toString());
+        assertEquals("Author with the highest average rating of all their books: Highest Rated Author. 5.00\n", stdOut.toString());
+    }
+
+    @Test
+    public void testprintAuthorWithHighestAverageRatingNotFound() {
+        Map<String, List<Book>> indexed = new HashMap<String, List<Book>>();
+
+        BookStats stats = Mockito.mock(BookStats.class);
+
+        // call the real method to return the author with highest average from the mock index
+        Mockito.when(stats.findAuthorWithHighestAverageRating(indexed)).thenCallRealMethod();
+
+        DisplayBookStats printer = new DisplayBookStats(stats);
+
+        captureStdOut();
+        printer.printAuthorWithHighestAverageRating();
+        resetStdOut();
+
+        assertEquals("", stdOut.toString());
     }
 }
