@@ -11,7 +11,6 @@ public class CSVParser {
     csvHeader = header.split(",");
   }
 
-  // TODO: throw exception if not the right number of columns
   public static Map<String, String> parseLine(String line) {
     if (line == null) {
       return null;
