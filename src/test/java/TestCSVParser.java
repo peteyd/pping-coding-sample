@@ -20,6 +20,7 @@ public class TestCSVParser {
         assertEquals("English", values.get("language"));
     }
 
+    @Test
     public void testParseLineWithNull() {
       CSVParser.readHeader("id,title");
 
@@ -28,6 +29,7 @@ public class TestCSVParser {
       assertEquals(null, values);
     }
 
+    @Test
     public void testParseLineWithWrongNumberOfColumns() {
       CSVParser.readHeader("id,title");
 

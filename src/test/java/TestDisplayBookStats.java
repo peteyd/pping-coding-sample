@@ -161,7 +161,7 @@ public class TestDisplayBookStats {
         assertEquals("Author with the highest ratio of star reviews to text reviews: High Ratio Author. 2.00\n", stdOut.toString());
     }
 
-        @Test
+    @Test
     public void testprintHighestRatioBookAuthorNotFound() {
         BookStats stats = Mockito.mock(BookStats.class);
 
